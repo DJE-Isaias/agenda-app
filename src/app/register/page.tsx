@@ -3,10 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import Header from "@/components/Header";
-import Link from "next/link";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
@@ -15,7 +13,7 @@ export default function LoginPage() {
     e.preventDefault();
 
     try {
-      const res = await fetch("/api/login", {
+      const res = await fetch("/api/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
@@ -27,8 +25,8 @@ export default function LoginPage() {
         return;
       }
 
-      toast.success("Login exitoso. Redirigiendo...");
-      router.push("/contacts");
+      toast.success("Registro exitoso. Redirigiendo al login...");
+      router.push("/");
     } catch (error: unknown) {
       toast.error(`Ocurrió un error. Inténtalo de nuevo: ${error}`);
     }
@@ -36,10 +34,7 @@ export default function LoginPage() {
 
   return (
     <div className="max-w-md mx-auto mt-10 bg-white p-6 rounded shadow">
-      <Header />
-      <h2 className="text-2xl font-bold mb-4 mt-4 text-center">
-        Inicio de Sesión
-      </h2>
+      <h2 className="text-2xl font-bold mb-4 text-center">Registro</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="text"
@@ -61,11 +56,8 @@ export default function LoginPage() {
           type="submit"
           className="w-full bg-primary text-white py-2 rounded"
         >
-          Iniciar Sesión
+          Registrarse
         </button>
-        <Link href="/register" className="text-primary text-center">
-          ¿Tienes cuenta?
-        </Link>
       </form>
     </div>
   );
