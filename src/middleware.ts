@@ -1,29 +1,22 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-// import { verifyToken } from "./lib/jwt";
 
 export async function middleware(req: NextRequest) {
   const token = req.cookies.get("token")?.value;
-  // const protectedRoutes = ['/contacts'];
+  const protectedRoutes = ["/contacts"];
+  const isProctedRoute = protectedRoutes.some((route) =>
+    req.nextUrl.pathname.startsWith(route)
+  );
 
-  if (token) {
-    // if (protectedRoutes.some((route) => req.nextUrl.pathname.startsWith(route))) {
-    //   return NextResponse.redirect(new URL('/', req.url));
-    // }
-  
-    // try {
-    //   if (token) await verifyToken(token ?? '');
-    //   if (req.nextUrl.pathname === "/") {
-    //     return NextResponse.redirect(new URL("/contacts", req.url));
-    //   }
-    //   return NextResponse.next();
-    // } catch (error) {
-    //   console.log("error", error);
-    //   return NextResponse.redirect(new URL("/", req.url));
-    // }
-  } else {
-    return NextResponse.redirect(new URL('/', req.url));
+  if (isProctedRoute && !token) {
+    return NextResponse.redirect(new URL("/", req.url));
   }
+
+  if (!isProctedRoute && token) {
+    return NextResponse.redirect(new URL("/contacts", req.url));
+  }
+
+  return NextResponse.next();
 }
 
 export const config = {

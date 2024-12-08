@@ -35,33 +35,8 @@ export default function ContactModal({
       socialLinks,
       image,
     };
-
-    try {
-      // Si estamos editando, realizamos una solicitud PUT
-      if (isEditing && contact?.id) {
-        await fetch(`/api/contacts/${contact.id}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newContact),
-        });
-      } else {
-        // Si estamos agregando, realizamos una solicitud POST
-        await fetch(`/api/contacts`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newContact),
-        });
-      }
-
-      onSave(newContact); // Llamamos la función onSave para actualizar la vista
-      onClose(); // Cerramos el modal
-    } catch (error) {
-      console.error("Error guardando contacto", error);
-    }
+    onSave(newContact);
+    onClose();
   };
 
   if (!isOpen) return null;

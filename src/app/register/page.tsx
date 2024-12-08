@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import Link from "next/link";
 
 export default function RegisterPage() {
   const [username, setUsername] = useState("");
@@ -59,6 +60,11 @@ export default function RegisterPage() {
           Registrarse
         </button>
       </form>
+      <div className="flex justify-center mt-3">
+        <Link href="/" className="text-primary text-center underline-offset-2 hover:underline">
+          Iniciar Sesión
+        </Link>
+      </div>
     </div>
   );
 }

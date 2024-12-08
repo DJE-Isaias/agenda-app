@@ -14,7 +14,7 @@ export default function ContactCard({
   const socials = JSON.parse(contact.socialLinks);
 
   return (
-    <div className="relative bg-white p-4 rounded shadow hover:shadow-lg transition">
+    <div className="group relative cursor-pointer bg-white p-4 rounded shadow hover:shadow-lg transition">
       <img
         src={contact.image}
         alt={contact.name}
@@ -37,12 +37,8 @@ export default function ContactCard({
           Eliminar
         </button>
       </div>
-      <div className="mt-2 flex justify-center space-x-2">
-        {socials.map((social: string) => (
-          <span key={social} className="text-xs text-gray-500">
-            {social}
-          </span>
-        ))}
+      <div className="mt-2 flex justify-center space-x-2 text-xs text-gray-500">
+        {socials}
       </div>
     </div>
   );

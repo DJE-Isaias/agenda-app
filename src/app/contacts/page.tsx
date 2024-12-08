@@ -14,16 +14,17 @@ export default function ContactsPage() {
   const [isEditing, setIsEditing] = useState(false);
 
   // Fetch contacts from the API when the component mounts
+  const fetchContacts = async () => {
+    try {
+      const response = await fetch("/api/contacts");
+      const data = await response.json();
+      setContacts(data);
+    } catch (error) {
+      console.error("Error fetching contacts", error);
+    }
+  };
+
   useEffect(() => {
-    const fetchContacts = async () => {
-      try {
-        const response = await fetch("/api/contacts");
-        const data = await response.json();
-        setContacts(data);
-      } catch (error) {
-        console.error("Error fetching contacts", error);
-      }
-    };
     fetchContacts();
   }, []);
 
@@ -71,15 +72,16 @@ export default function ContactsPage() {
     } else {
       // Create new contact
       try {
-        const response = await fetch("/api/contacts", {
+        await fetch("/api/contacts", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(contact),
         });
-        const newContact = await response.json();
-        setContacts((prev) => [...prev, newContact]);
+        // const newContact = await response.json();
+        await fetchContacts();
+        // setContacts((prev) => [...prev, newContact]);
       } catch (error) {
         console.error("Error adding contact", error);
       }
