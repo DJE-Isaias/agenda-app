@@ -1,4 +1,5 @@
 import { Contact } from "@/lib/models/contact";
+import Image from "next/image";
 
 interface ContactCardProps {
   contact: Contact;
@@ -13,7 +14,9 @@ export default function ContactCard({
 }: ContactCardProps) {
   return (
     <div className="group relative cursor-pointer bg-white p-4 rounded shadow hover:shadow-lg transition">
-      <img
+      <Image
+        width={200}
+        height={200}
         src={contact.image}
         alt={contact.name}
         className="w-16 h-16 rounded-full mx-auto"

@@ -1,4 +1,5 @@
 import { Contact } from "@/lib/models/contact";
+import Image from "next/image";
 import { useState } from "react";
 
 interface ContactModalProps {
@@ -146,7 +147,9 @@ export default function ContactModal({
             />
             {image && (
               <div className="mt-2">
-                <img
+                <Image
+                  width={200}
+                  height={200}
                   src={image}
                   alt="Preview"
                   className="w-16 h-16 object-cover rounded-full"
