@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
         email,
         phone,
         comment,
-        socialLinks: JSON.stringify(socialLinks),
+        socialLinks,
         image,
       },
     });

@@ -44,7 +44,7 @@ export async function PUT(
         email,
         phone,
         comment,
-        socialLinks: JSON.stringify(socialLinks),
+        socialLinks,
         image,
       },
     });

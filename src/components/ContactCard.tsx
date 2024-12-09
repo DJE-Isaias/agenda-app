@@ -11,8 +11,6 @@ export default function ContactCard({
   onEdit,
   onDelete,
 }: ContactCardProps) {
-  const socials = JSON.parse(contact.socialLinks);
-
   return (
     <div className="group relative cursor-pointer bg-white p-4 rounded shadow hover:shadow-lg transition">
       <img
@@ -38,7 +36,11 @@ export default function ContactCard({
         </button>
       </div>
       <div className="mt-2 flex justify-center space-x-2 text-xs text-gray-500">
-        {socials}
+        {contact.socialLinks.split(",").map((social) => (
+          <nav key={social} className="bg-primary text-white p-1 rounded-md">
+            {social}
+          </nav>
+        ))}
       </div>
     </div>
   );
