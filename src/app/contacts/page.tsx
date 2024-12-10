@@ -41,6 +41,7 @@ export default function ContactsPage() {
   };
 
   const handleDeleteContact = async (id: string) => {
+    console.log('id', id);
     try {
       await fetch(`/api/contacts/${id}`, { method: "DELETE" });
       setContacts((prev) => prev.filter((contact) => contact.id !== id));

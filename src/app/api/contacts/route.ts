@@ -4,7 +4,6 @@ import { getUserFromCookies } from "@/lib/jwt";
 
 export async function GET() {
   const user = await getUserFromCookies();
-
   if (!user) {
     return NextResponse.json({ error: "No autorizado" }, { status: 401 });
   }
